@@ -1,10 +1,10 @@
 package com.example.tatvasoft.userScreen
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_user.view.*
 
 
 class UserScreenAdapter(
-    var items: MutableList<User> = mutableListOf(),
+    private var items: MutableList<User> = mutableListOf(),
     private val context: Context,
 ) : RecyclerView.Adapter<UserScreenAdapter.ViewHolder>() {
 
@@ -28,6 +28,7 @@ class UserScreenAdapter(
         val item = items[position]
 
         holder.oddLayout.visibility = View.GONE
+        holder.parentLayout.removeAllViews()
 
         Glide.with(context)
             .load(item.image)
@@ -35,28 +36,25 @@ class UserScreenAdapter(
 
         holder.name.text = item.name
 
-        Log.e(item.name,item.items.size.toString())
-
+        /**
+         * check item's even or odd
+         */
         if((item.items.size % 2) != 0){
-            Log.e("Datasdsd",item.name)
             holder.oddLayout.visibility = View.VISIBLE
 
             if((item.items.size / 2) != 0){
-                Log.e("Dat1",item.name)
                 Glide.with(context)
                     .load(item.items[0])
                     .into(holder.oddLayout)
                 holder.addLayout(item, (item.items.size / 2),true)
             }
             else{
-                Log.e("Dat2",item.name)
                 Glide.with(context)
                     .load(item.items[0])
                     .into(holder.oddLayout)
             }
         }
         else{
-            Log.e("even",item.name)
             holder.oddLayout.visibility = View.GONE
             holder.addLayout(item, (item.items.size / 2),false)
         }
@@ -81,11 +79,13 @@ class UserScreenAdapter(
         val name = view.item_name!!
         val pic = view.item_profile_image!!
         val oddLayout = view.item_odd_first!!
-        private val parentLayout = view.parent_ly!!
+        val parentLayout = view.parent_ly!!
+
+     /**
+      * add linear layout as per the data
+      */
 
      fun addLayout(item: User, rem: Int, odd: Boolean) {
-
-         val lay = arrayOfNulls<LinearLayout>(rem)
 
          for (i in  0 until rem) {
              val layout = LinearLayout(context)
@@ -98,11 +98,14 @@ class UserScreenAdapter(
              layout.orientation = LinearLayout.HORIZONTAL
 
              val firstParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                 ViewGroup.LayoutParams.MATCH_PARENT , 50
+                 ViewGroup.LayoutParams.MATCH_PARENT , 300
              )
              firstParams.weight = 0.5f
+             firstParams.setMargins(0,10,10,10)
+
              val firstImage = AppCompatImageView(context)
              firstImage.layoutParams = firstParams
+             firstImage.scaleType = ImageView.ScaleType.FIT_XY
 
              if(odd){
                  Glide.with(context)
@@ -118,13 +121,15 @@ class UserScreenAdapter(
              layout.addView(firstImage)
 
              val secondParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                 ViewGroup.LayoutParams.MATCH_PARENT, 50
+                 ViewGroup.LayoutParams.MATCH_PARENT, 300
              )
              secondParams.weight = 0.5f
+             secondParams.setMargins(10,10,0,10)
+
              val secondImage = AppCompatImageView(context)
              secondImage.layoutParams = secondParams
+             secondImage.scaleType = ImageView.ScaleType.FIT_XY
 
-             Log.e(item.name,item.items[i]+1)
              if(odd){
                  Glide.with(context)
                      .load(item.items[i]+2)
