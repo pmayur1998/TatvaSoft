@@ -21,6 +21,9 @@ class UserScreenActivity : AppCompatActivity() {
     private var currentPage = 0
     private var totalPage  = 0
 
+    /**
+     * observer the data from viewModel and set in list with pagination of limit 5
+     */
     private val apiObserver = Observer<Response<Result?>> { response ->
         if (response != null) {
             user.addAll(response.responseBody!!.data.users)
@@ -37,6 +40,7 @@ class UserScreenActivity : AppCompatActivity() {
             addNewData()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_screen)
@@ -51,7 +55,7 @@ class UserScreenActivity : AppCompatActivity() {
         user_screen_rv.adapter = adapter
         setPaginationListener(user_screen_rv.layoutManager as LinearLayoutManager)
 
-        viewModel.getUsersFromAPI()!!.observe(this,apiObserver)
+        viewModel.getUsersFromAPI().observe(this,apiObserver)
     }
 
     private fun setPaginationListener(linearLayoutManager: LinearLayoutManager) {
