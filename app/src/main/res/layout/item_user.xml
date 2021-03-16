@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_5sdp">
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginHorizontal="@dimen/_10sdp"
+         android:layout_marginVertical="@dimen/_15sdp"
+         android:orientation="vertical">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal">
+
+             <de.hdodenhof.circleimageview.CircleImageView
+                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                 android:id="@+id/item_profile_image"
+                 android:layout_width="@dimen/_55sdp"
+                 android:layout_height="@dimen/_55sdp"
+                 android:layout_marginRight="@dimen/_12sdp"/>
+
+                 <TextView
+                     android:id="@+id/item_name"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:fontFamily="@font/nh_aas_grotesktxpro_regular"
+                     android:gravity="left"
+                     android:layout_gravity="center"
+                     android:textColor="@color/navy"
+                     android:maxLines="1"
+                     android:ellipsize="end"
+                     android:textSize="@dimen/_16ssp" />
+
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/parent_ly"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:orientation="vertical"
+             android:layout_marginVertical="@dimen/_5sdp">
+
+             <androidx.appcompat.widget.AppCompatImageView
+                 android:id="@+id/item_odd_first"
+                 android:visibility="gone"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/_100sdp"
+                 android:layout_gravity="center"/>
+
+         </LinearLayout>
+
+     </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
